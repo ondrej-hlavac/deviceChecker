@@ -4,7 +4,7 @@ module.exports = {
 
   // webpack will take the files from ./src/index
   entry: [
-    './src',
+    './src/index.tsx',
   ],
   
   // and output it into /dist as bundle.js
@@ -20,11 +20,10 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js'],
     alias: { 
       components: path.resolve(__dirname, './src/components/'),
-      assets: path.resolve(__dirname, './src/assets/'),
-      context: path.resolve(__dirname, './src/context/'),
+      constants: path.resolve(__dirname, './src/constants/'),
       interfaces: path.resolve(__dirname, './src/interfaces/'),
-      styles: path.resolve(__dirname, './src/styles/'),
-      models: path.resolve(__dirname, './src/models/'),
+      pages: path.resolve(__dirname, './src/pages/'),
+      sharedStylesComponents: path.resolve(__dirname, './src/sharedStylesComponents/'),
     }
   },
 
@@ -56,6 +55,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      filename: './index.html',
       favicon: "./src/favicon/favicon-32x32.png"
     })
   ]

@@ -21,4 +21,10 @@ export const StyledGlobalStyles = createGlobalStyle`
     background-color: ${StyledVariables.COLOR_TURQUOISE};
     line-height: 1.8em;
   }
+
+  .row {
+    display: flex;
+    justify-content: stretch;
+    margin-top: 1em;
+  }
 `;

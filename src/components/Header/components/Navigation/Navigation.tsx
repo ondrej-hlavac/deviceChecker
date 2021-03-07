@@ -1,32 +1,34 @@
+import { routes } from 'constants/routes';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { StyledNavigation } from './StyledNavigation';
 
 const Navigation = () => {
   return (
     <StyledNavigation>
-      {/* <button type="button" className="navigation-toggler">
-        <div id="hamburger" className="circle icon false">
-          <span className="line top"></span>
-          <span className="line middle"></span>
-          <span className="line bottom"></span>
+      <button type="button" className="navigation-toggler">
+        <div className="circle icon">
+          <span className="line top" />
+          <span className="line middle" />
+          <span className="line bottom" />
         </div>
-      </button> */}
+      </button>
+      {/* Admin only action */}
       <ul className="nav-wrapper">
         <li className="nav-link-wrapper">
-          <a className="nav-link" href="#">
+          <Link className="nav-link" to={routes.CREATE_DEVICE}>
             Create Device
-          </a>
+          </Link>
         </li>
         <li className="nav-link-wrapper">
           <span className="nav-link user-name">user@loged.in</span>
         </li>
         <li className="nav-link-wrapper">
-          <a className="nav-link" href="#">
+          <Link className="nav-link" to={routes.LOG_IN}>
             Login / Logout
-          </a>
+          </Link>
         </li>
       </ul>
-      {/* Admin only action */}
     </StyledNavigation>
   );
 };
