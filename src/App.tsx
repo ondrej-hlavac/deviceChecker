@@ -1,11 +1,21 @@
 import React from 'react';
 import { StyledGlobalStyles } from 'sharedStyledComponents/StyledGlobalStyles';
+import Header from 'components/Header';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { routes } from 'constants/routes';
 
 const App = () => {
   return (
     <>
       <StyledGlobalStyles />
-      <h1>hello</h1>
+      <Router>
+        <Header />
+        <Switch>
+          <Route path={routes.HOME}>
+            <div>home</div>
+          </Route>
+        </Switch>
+      </Router>
       {/* <Router>
         <TopMenu />
         <Switch>
