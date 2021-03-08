@@ -2,7 +2,7 @@ import React from 'react';
 import { StyledSearchbar } from './StyledSearchbar';
 
 const Searchbar = () => {
-  return <StyledSearchbar>Searchbar</StyledSearchbar>;
+  return <StyledSearchbar />;
 };
 
 export default Searchbar;
