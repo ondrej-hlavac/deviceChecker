@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Headline } from 'sharedStyledComponents/atoms/Headlines';
 import { NarrowContainer } from 'sharedStyledComponents/wrappers/StyledNarrowContainer';
 import { StyledFormWrapper } from 'sharedStyledComponents/wrappers/StyledFormWrapper';
-import Input from 'components/Input';
 import { SubmitButton } from 'sharedStyledComponents/atoms/SubmitButton';
-import { loginUser } from 'api/user/loginUser';
+import Input from 'components/Input';
+import { routes } from 'constants/routes';
 import { ILoginUser } from 'interfaces/ILoginUser';
 import useLocalStorage from 'hooks/useLocalStorage';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { routes } from 'constants/routes';
+import { loginUser } from 'services/api/user/loginUser';
 
 type submitEventType = React.FormEvent<HTMLFormElement>;
 
@@ -58,6 +58,7 @@ const Login = (props: IProps) => {
 
         {/* Log In form */}
         <form onSubmit={(e) => handleSubmit(e)}>
+          {/* Email */}
           <Input
             label="Email:"
             id="email"
@@ -66,6 +67,8 @@ const Login = (props: IProps) => {
             defaultValue={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+
+          {/* Password */}
           <Input
             label="Password:"
             id="pass"
