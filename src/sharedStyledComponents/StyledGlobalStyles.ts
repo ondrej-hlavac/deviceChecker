@@ -9,10 +9,12 @@ export const StyledGlobalStyles = createGlobalStyle`
   */
   @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;800&display=swap");
 
+  // set padding behavior 
   * {
     box-sizing: border-box;
   }
 
+  // default styles and reset
   body {
     margin: 0;
     padding: 0;
@@ -21,6 +23,12 @@ export const StyledGlobalStyles = createGlobalStyle`
     line-height: 1.8em;
   }
 
+  // clear browser autofill input color
+  input {
+    filter: none;
+  }
+
+  // selected text highlight
   ::selection {
     color: ${StyledVariables.COLOR_PURPLE};
     background-color: ${StyledVariables.COLOR_YELLOW};

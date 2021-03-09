@@ -1,16 +1,46 @@
 import React, { useState } from 'react';
-import { Button } from 'sharedStyledComponents/atoms/Button';
 import { Headline } from 'sharedStyledComponents/atoms/Headlines';
 import { NarrowContainer } from 'sharedStyledComponents/wrappers/StyledNarrowContainer';
 import { StyledFormWrapper } from 'sharedStyledComponents/wrappers/StyledFormWrapper';
 import Input from 'components/Input';
+import { SubmitButton } from 'sharedStyledComponents/atoms/SubmitButton';
+import { loginUser } from 'api/user/loginUser';
+import { ILoginUser } from 'interfaces/ILoginUser';
+import useLocalStorage from 'hooks/useLocalStorage';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { routes } from 'constants/routes';
 
-const Login = () => {
+type submitEventType = React.FormEvent<HTMLFormElement>;
+
+interface IProps extends RouteComponentProps<any> {}
+
+const Login = (props: IProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState(false);
+  const { setItem: setUser } = useLocalStorage('user');
 
-  const handleSubmit = () => {
-    console.log('submit email', email, password);
+  // submit login form
+  const handleSubmit = async (e: submitEventType) => {
+    e.preventDefault();
+
+    // login data
+    const loginData: ILoginUser = {
+      login: email,
+      password,
+    };
+
+    // make ajax call
+    const loginResponse = await loginUser(loginData);
+
+    // handle login error
+    if (!loginResponse) return setLoginError(true);
+
+    // save user to localstorage
+    setUser(JSON.stringify(loginResponse));
+
+    // redirect after success
+    props.history.push(routes.HOME);
   };
 
   return (
@@ -18,8 +48,16 @@ const Login = () => {
       <StyledFormWrapper>
         <Headline as="h1">Log in</Headline>
 
+        {/* Log In error alert */}
+        {/* TODO: create form alert styled-component */}
+        {loginError && (
+          <span style={{ color: 'red' }}>
+            Chyba přihlášení, zkontrolujte prosím přihlašovací údaje.
+          </span>
+        )}
+
         {/* Log In form */}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <Input
             label="Email:"
             id="email"
@@ -36,11 +74,11 @@ const Login = () => {
             defaultValue={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button onClick={handleSubmit}>Submit</Button>
+          <SubmitButton type="submit" value="Přihlásit se" />
         </form>
       </StyledFormWrapper>
     </NarrowContainer>
   );
 };
 
-export default Login;
+export default withRouter(Login);
