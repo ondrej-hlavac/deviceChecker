@@ -2,7 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 import { StyledVariables } from './StyledVariables';
 
 export const StyledGlobalStyles = createGlobalStyle`
-
   /*
   BASIC FONT FAMILY SPEC 
   font-family: 'Libre Baskerville', serif;
@@ -22,9 +21,8 @@ export const StyledGlobalStyles = createGlobalStyle`
     line-height: 1.8em;
   }
 
-  .row {
-    display: flex;
-    justify-content: stretch;
-    margin-top: 1em;
+  ::selection {
+    color: ${StyledVariables.COLOR_PURPLE};
+    background-color: ${StyledVariables.COLOR_YELLOW};
   }
 `;

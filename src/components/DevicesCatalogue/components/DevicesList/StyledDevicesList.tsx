@@ -14,4 +14,8 @@ export const StyledDevicesList = styled.article`
   @media screen and (min-width: 1200px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
+
+  @media screen and (min-width: 2050px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
 `;

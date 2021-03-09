@@ -7,10 +7,13 @@ import Searchbar from './components/Searchbar';
 const DevicesCatalogue = () => {
   return (
     <StyledDevicesCatalogue>
-      <div className="row">
+      {/* filters and searchbar */}
+      <div className="filters_searchbar-wrapper">
         <Filters />
         <Searchbar />
       </div>
+
+      {/* main devices list */}
       <DevicesList />
     </StyledDevicesCatalogue>
   );

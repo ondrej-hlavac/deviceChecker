@@ -2,8 +2,10 @@ import styled from 'styled-components';
 
 export const NarrowContainer = styled.article`
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  margin: 0 auto;
+  justify-content: center;
+  margin: auto;
   width: 100%;
 
   @media screen and (min-width: 540px) {

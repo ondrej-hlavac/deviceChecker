@@ -1,5 +1,6 @@
 interface IVariables {
   COLOR_WHITE: string;
+  COLOR_BLACK: string;
   COLOR_PURPLE: string;
   COLOR_YELLOW: string;
   COLOR_ORANGE: string;
@@ -9,15 +10,16 @@ interface IVariables {
   FONT_TEXT: string;
   FONT_FAMILY_HEADLINE: string;
   FONT_FAMILY_TEXT: string;
-  HEADER_HEIGHT: string;
   FONT_WEIGHT_LIGHT: number;
   FONT_WEIGHT_BOLD: number;
-
+  HEADER_HEIGHT: string;
+  INPUT_HEIGHT: string;
 }
 
 export const StyledVariables: IVariables = {
   // colors
   COLOR_WHITE: '#ffffff',
+  COLOR_BLACK: '#5e5e5e',
   COLOR_PURPLE: '#A64AC9',
   COLOR_YELLOW: '#FCCD04',
   COLOR_ORANGE: '#FFB48F',
@@ -34,4 +36,5 @@ export const StyledVariables: IVariables = {
 
   // components variables
   HEADER_HEIGHT: '100px',
+  INPUT_HEIGHT: '54px',
 }
