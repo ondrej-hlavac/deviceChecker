@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Headline } from 'sharedStyledComponents/atoms/Headlines';
 import { NarrowContainer } from 'sharedStyledComponents/wrappers/StyledNarrowContainer';
@@ -7,8 +7,10 @@ import { SubmitButton } from 'sharedStyledComponents/atoms/SubmitButton';
 import Input from 'components/Input';
 import { routes } from 'constants/routes';
 import { ILoginUser } from 'interfaces/ILoginUser';
-import useLocalStorage from 'hooks/useLocalStorage';
 import { loginUser } from 'services/api/user/loginUser';
+import { Context as UserContext } from 'context/UserContext';
+import { ILoginUserData } from 'interfaces/ILoginResponse';
+// import useLocalStorage from 'hooks/useLocalStorage';
 
 type submitEventType = React.FormEvent<HTMLFormElement>;
 
@@ -18,7 +20,8 @@ const Login = (props: IProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(false);
-  const { setItem: setUser } = useLocalStorage('user');
+  const { addUser } = useContext(UserContext);
+  // const { setItem: setUser } = useLocalStorage('user');
 
   // submit login form
   const handleSubmit = async (e: submitEventType) => {
@@ -31,13 +34,16 @@ const Login = (props: IProps) => {
     };
 
     // make ajax call
-    const loginResponse = await loginUser(loginData);
+    const loginResponse: boolean | ILoginUserData = await loginUser(loginData);
 
     // handle login error
     if (!loginResponse) return setLoginError(true);
 
     // save user to localstorage
-    setUser(JSON.stringify(loginResponse));
+    // setUser(JSON.stringify(loginResponse));
+
+    // save user to context
+    addUser(loginResponse as ILoginUserData);
 
     // redirect after success
     props.history.push(routes.HOME);

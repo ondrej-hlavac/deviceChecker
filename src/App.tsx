@@ -6,10 +6,11 @@ import Header from 'components/Header';
 import DevicesPage from 'pages/DevicesPage';
 import LogInPage from 'pages/LogInPage';
 import CreateDevicePage from 'pages/CreateDevicePage';
+import ContextProvider from 'context/ContextProvider';
 
 const App = () => {
   return (
-    <div>
+    <ContextProvider>
       <StyledGlobalStyles />
       <Router>
         <Header />
@@ -25,7 +26,7 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
-    </div>
+    </ContextProvider>
   );
 };
 

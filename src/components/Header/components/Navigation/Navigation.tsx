@@ -1,9 +1,13 @@
-import { routes } from 'constants/routes';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Context as UserContext } from 'context/UserContext';
+import { routes } from 'constants/routes';
 import { StyledNavigation } from './StyledNavigation';
 
 const Navigation = () => {
+  const { user } = useContext(UserContext);
+  console.log('🚀 ~ file: Navigation.tsx ~ line 10 ~ Navigation ~ user', user);
+
   return (
     <StyledNavigation>
       <button type="button" className="navigation-toggler">
