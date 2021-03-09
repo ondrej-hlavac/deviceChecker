@@ -8,5 +8,6 @@ export const isUserAdmin = (user: ILoginUserData) => user.type === EnumUserType.
 export const userTokenFromLS = () => {
   const userString = localStorage.getItem('user');
   const { token } = userString && JSON.parse(userString);
+  if (!token) return;
   return token;
 }
