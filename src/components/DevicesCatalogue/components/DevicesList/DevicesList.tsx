@@ -2,15 +2,22 @@ import React from 'react';
 import Device from './components/Device';
 import { StyledDevicesList } from './StyledDevicesList';
 
-const DevicesList = () => {
+interface IProps {
+  devices: any[];
+}
+
+const DevicesList = ({ devices }: IProps) => {
+  console.log(
+    '🚀 ~ file: DevicesList.tsx ~ line 10 ~ DevicesList ~ devices',
+    devices
+  );
   return (
     <StyledDevicesList>
-      <Device />
-      <Device />
-      <Device />
-      <Device />
-      <Device />
-      <Device />
+      {devices &&
+        devices.map((device: any) => {
+          const { id } = device;
+          return <Device key={id} device={device} />;
+        })}
     </StyledDevicesList>
   );
 };

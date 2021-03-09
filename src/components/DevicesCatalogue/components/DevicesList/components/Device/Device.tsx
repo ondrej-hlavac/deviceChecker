@@ -1,24 +1,41 @@
+import { IDevice } from 'interfaces/IDevice';
 import React from 'react';
 import { Button } from 'sharedStyledComponents/atoms/Button';
 import { Headline } from 'sharedStyledComponents/atoms/Headlines';
 import { Paragraph } from 'sharedStyledComponents/atoms/Paragraph';
+import BorrowedInfo from './components/BorrowedInfo';
+import DeviceImage from './components/DeviceImage';
 import { StyledDevice } from './StyledDevice';
 
-const Device = () => {
+interface IProps {
+  device: IDevice;
+}
+
+const Device = ({ device }: IProps) => {
+  const { borrowed, image, model, os, osVersion, vendor } = device;
+
   return (
     <StyledDevice>
       {/* device main image */}
-      <img className="device-image" src="" alt="phone image" />
+      <DeviceImage src={image} alt={model} />
 
       {/* device info */}
-      <Headline as="h1" className="device-name">
-        Phone name
+      <Headline as="h3" className="device-name">
+        {model}
       </Headline>
-      <Paragraph className="device-manufacturer">Manufacturer</Paragraph>
-      <Paragraph className="device-os">Operation system</Paragraph>
+      <Paragraph className="device-manufacturer">
+        Manufacturer: {vendor}
+      </Paragraph>
+      <Paragraph className="device-os">
+        Operation system: {os} - {osVersion}
+      </Paragraph>
 
       {/* device actions */}
-      <Button>Půjčit</Button>
+      {!borrowed ? (
+        <Button>Půjčit</Button>
+      ) : (
+        <BorrowedInfo borrowedInfo={borrowed} />
+      )}
     </StyledDevice>
   );
 };

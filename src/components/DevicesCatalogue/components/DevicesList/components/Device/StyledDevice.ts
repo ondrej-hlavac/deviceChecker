@@ -16,7 +16,7 @@ export const StyledDevice = styled.div`
   }
 
   .device-image {
-    flex-grow: 1;
+    max-width: 100%;
   }
 
   .device-name {

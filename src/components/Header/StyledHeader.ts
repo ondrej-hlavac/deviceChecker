@@ -11,4 +11,5 @@ export const StyledHeader = styled.header`
   height: ${StyledVariables.HEADER_HEIGHT};
   color: ${StyledVariables.COLOR_WHITE};
   background-color: ${StyledVariables.COLOR_PURPLE};
+  z-index: 2;
 `;

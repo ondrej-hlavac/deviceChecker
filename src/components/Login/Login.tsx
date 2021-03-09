@@ -10,7 +10,7 @@ import { ILoginUser } from 'interfaces/ILoginUser';
 import { loginUser } from 'services/api/user/loginUser';
 import { Context as UserContext } from 'context/UserContext';
 import { ILoginUserData } from 'interfaces/ILoginResponse';
-// import useLocalStorage from 'hooks/useLocalStorage';
+import useLocalStorage from 'hooks/useLocalStorage';
 
 type submitEventType = React.FormEvent<HTMLFormElement>;
 
@@ -21,7 +21,7 @@ const Login = (props: IProps) => {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(false);
   const { addUser } = useContext(UserContext);
-  // const { setItem: setUser } = useLocalStorage('user');
+  const { setItem: setUser } = useLocalStorage('user');
 
   // submit login form
   const handleSubmit = async (e: submitEventType) => {
@@ -40,7 +40,7 @@ const Login = (props: IProps) => {
     if (!loginResponse) return setLoginError(true);
 
     // save user to localstorage
-    // setUser(JSON.stringify(loginResponse));
+    setUser(JSON.stringify(loginResponse));
 
     // save user to context
     addUser(loginResponse as ILoginUserData);
