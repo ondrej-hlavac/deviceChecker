@@ -1,17 +1,25 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { Context as UserContext } from 'context/UserContext';
 import { routes } from 'constants/routes';
 import { StyledNavigation } from './StyledNavigation';
 import { isUserAdmin } from 'utils/user';
+import { Button } from 'sharedStyledComponents/atoms/Button';
 // import useLocalStorage from 'hooks/useLocalStorage';
 
-const Navigation = () => {
-  const { user } = useContext(UserContext);
+interface IProps extends RouteComponentProps<any> {}
+
+const Navigation = (props: IProps) => {
+  const { user, removeUser } = useContext(UserContext);
   const { name } = user;
 
   // const { getItem } = useLocalStorage('user');
   // const { name } = getItem.length && JSON.parse(getItem);
+
+  const logoutUser = () => {
+    removeUser();
+    props.history.push(routes.LOG_IN);
+  };
 
   return (
     <StyledNavigation>
@@ -42,14 +50,23 @@ const Navigation = () => {
         )}
 
         {/* log in & log out */}
-        <li className="nav-link-wrapper">
-          <Link className="nav-link" to={routes.LOG_IN}>
-            Login / Logout
-          </Link>
-        </li>
+        {!name && (
+          <li className="nav-link-wrapper">
+            <Link className="nav-link" to={routes.LOG_IN}>
+              Login
+            </Link>
+          </li>
+        )}
+        {name && (
+          <li className="nav-link-wrapper">
+            <Button className="nav-link" onClick={logoutUser}>
+              Logout
+            </Button>
+          </li>
+        )}
       </ul>
     </StyledNavigation>
   );
 };
 
-export default Navigation;
+export default withRouter(Navigation);
