@@ -6,7 +6,8 @@ export const LinkText = styled(Link)`
   display: inline-block;
   color: ${StyledVariables.COLOR_PURPLE};
 
-  &:hover, &:active {
+  &:hover,
+  &:active {
     color: ${StyledVariables.COLOR_ORANGE};
   }
 `;

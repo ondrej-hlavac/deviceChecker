@@ -12,7 +12,7 @@ export const StyledDevice = styled.div`
   background-color: ${StyledVariables.COLOR_WHITE};
 
   &:hover {
-    border-color: ${StyledVariables.COLOR_YELLOW}
+    border-color: ${StyledVariables.COLOR_YELLOW};
   }
 
   .device-image {
@@ -21,6 +21,8 @@ export const StyledDevice = styled.div`
 
   .device-name {
     margin-bottom: 8px;
+    max-width: 100%;
+    font-size: 24px;
   }
 
   p {

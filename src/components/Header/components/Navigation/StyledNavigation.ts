@@ -44,17 +44,18 @@ export const StyledNavigation = styled.nav`
       padding: 1em 2em;
       text-decoration: none;
       color: ${StyledVariables.COLOR_WHITE};
-      transition: all .3s ease;
+      transition: all 0.3s ease;
 
       &:not(.user-name) {
-        &:hover, &:focus, &:active {
+        &:hover,
+        &:focus,
+        &:active {
           color: ${StyledVariables.COLOR_PURPLE};
           background-color: ${StyledVariables.COLOR_YELLOW};
         }
       }
     }
   }
-
 
   .navigation-toggler {
     width: 80px;
@@ -95,7 +96,7 @@ export const StyledNavigation = styled.nav`
       transform: rotate(-45deg);
       top: 48%;
     }
-    
+
     @media screen and (min-width: 718px) {
       display: none;
     }

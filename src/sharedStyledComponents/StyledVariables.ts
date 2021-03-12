@@ -14,6 +14,7 @@ interface IVariables {
   FONT_WEIGHT_BOLD: number;
   HEADER_HEIGHT: string;
   INPUT_HEIGHT: string;
+  BUTTON_HEIGHT: string;
 }
 
 export const StyledVariables: IVariables = {
@@ -25,7 +26,7 @@ export const StyledVariables: IVariables = {
   COLOR_ORANGE: '#FFB48F',
   COLOR_LIGHTBROWN: '#F5E6CC',
   COLOR_TURQUOISE: '#17E9E0',
-  
+
   // typography
   FONT_FAMILY_HEADLINE: "'Libre Franklin', serif",
   FONT_FAMILY_TEXT: "'Libre Franklin', serif",
@@ -37,4 +38,5 @@ export const StyledVariables: IVariables = {
   // components variables
   HEADER_HEIGHT: '100px',
   INPUT_HEIGHT: '54px',
-}
+  BUTTON_HEIGHT: '80px',
+};

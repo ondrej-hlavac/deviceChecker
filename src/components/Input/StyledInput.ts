@@ -24,7 +24,8 @@ export const InputField = styled.input`
   width: 100%;
   padding: 1em 3.4em;
   border: 1px solid ${StyledVariables.COLOR_PURPLE};
-  border-color: transparent transparent ${StyledVariables.COLOR_PURPLE} transparent;
+  border-color: transparent transparent ${StyledVariables.COLOR_PURPLE}
+    transparent;
   text-align: center;
   font-size: 18px;
   color: ${StyledVariables.COLOR_BLACK};
@@ -46,6 +47,6 @@ export const InputField = styled.input`
     background: ${StyledVariables.COLOR_WHITE};
     top: 2px;
     left: 8px;
-    font-size:12px;
+    font-size: 12px;
   }
 `;

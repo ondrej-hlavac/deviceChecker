@@ -8,4 +8,4 @@ export const StyledFilters = styled.div`
   @media screen and (min-width: 800px) {
     flex-direction: row;
   }
-`
+`;

@@ -20,11 +20,9 @@
 		"jsx": "react",
     "baseUrl": "./src",
     "paths": {
-      "components": [ "src/components "],
-      "context": [ "src/context "],
-      "interfaces": [ "src/interfaces" ],
-      "styles": [ "src/styles" ],
-      "models": [ "src/models "]
+      "components": [ "src/components/*" ],
+      "context": [ "src/context/*" ],
+      "interfaces": [ "src/interfaces/*" ],
     },
 		"lib": [
 			"es2015",

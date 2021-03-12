@@ -1,16 +1,17 @@
+import { IDevice } from 'interfaces/IDevice';
 import React from 'react';
 import Device from './components/Device';
 import { StyledDevicesList } from './StyledDevicesList';
 
 interface IProps {
-  devices: any[];
+  devices: IDevice[];
 }
 
 const DevicesList = ({ devices }: IProps) => {
-  console.log(
-    '🚀 ~ file: DevicesList.tsx ~ line 10 ~ DevicesList ~ devices',
-    devices
-  );
+  console.log('🚀 ~ file: DevicesList.tsx ~ line 22 ~ DevicesList ~ devices', devices);
+
+  if (!devices.length) return <span>žádný telefon nevyhovuje zvoleným filtrům</span>;
+
   return (
     <StyledDevicesList>
       {devices &&

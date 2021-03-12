@@ -4,12 +4,14 @@ import styled from 'styled-components';
 export const StyledDeviceImage = styled.div`
   position: relative;
   display: block;
-  height: 100%;
   text-align: center;
+  flex-grow: 1;
 
   .device-image {
-    object-fit: cover;
-    object-position: center center;
+    max-width: 250px;
+    height: 100%;
+    object-fit: contain;
+    /* object-position: center center; */
   }
 
   .image-fallback {

@@ -2,10 +2,10 @@ import { EnumUserType } from './EnumUserType';
 
 export interface ILoginUserData {
   id: string;
-​​  login: string;
+  login: string;
   name: string;
   token: string;
-  type: keyof  typeof EnumUserType;
+  type: EnumUserType;
 }
 
 export interface ILoginResponse {

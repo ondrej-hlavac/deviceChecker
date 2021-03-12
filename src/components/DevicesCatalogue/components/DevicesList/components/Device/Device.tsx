@@ -20,22 +20,16 @@ const Device = ({ device }: IProps) => {
       <DeviceImage src={image} alt={model} />
 
       {/* device info */}
-      <Headline as="h3" className="device-name">
+      <Headline as='h4' className='device-name'>
         {model}
       </Headline>
-      <Paragraph className="device-manufacturer">
-        Manufacturer: {vendor}
-      </Paragraph>
-      <Paragraph className="device-os">
+      <Paragraph className='device-manufacturer'>Manufacturer: {vendor}</Paragraph>
+      <Paragraph className='device-os'>
         Operation system: {os} - {osVersion}
       </Paragraph>
 
       {/* device actions */}
-      {!borrowed ? (
-        <Button>Půjčit</Button>
-      ) : (
-        <BorrowedInfo borrowedInfo={borrowed} />
-      )}
+      {!borrowed ? <Button>Půjčit</Button> : <BorrowedInfo borrowedInfo={borrowed} />}
     </StyledDevice>
   );
 };

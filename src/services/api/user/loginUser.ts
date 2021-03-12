@@ -7,7 +7,9 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-export const loginUser = async (data: ILoginUser): Promise<boolean | ILoginUserData> => {
+export const loginUser = async (
+  data: ILoginUser
+): Promise<boolean | ILoginUserData> => {
   return await axios
     .post(API_LOGIN, JSON.stringify(data), { headers })
     .then((res: AxiosResponse<ILoginUserData>) => {
@@ -17,4 +19,4 @@ export const loginUser = async (data: ILoginUser): Promise<boolean | ILoginUserD
       console.error(e);
       return false;
     });
-}
+};

@@ -11,7 +11,7 @@ interface IProps extends RouteComponentProps<any> {}
 
 const Navigation = (props: IProps) => {
   const { user, removeUser } = useContext(UserContext);
-  const { name } = user;
+  const { name, token } = user;
 
   // const { getItem } = useLocalStorage('user');
   // const { name } = getItem.length && JSON.parse(getItem);
@@ -24,42 +24,42 @@ const Navigation = (props: IProps) => {
   return (
     <StyledNavigation>
       {/* mobile menu toggler */}
-      <button type="button" className="navigation-toggler">
-        <div className="circle icon">
-          <span className="line top" />
-          <span className="line middle" />
-          <span className="line bottom" />
+      <button type='button' className='navigation-toggler'>
+        <div className='circle icon'>
+          <span className='line top' />
+          <span className='line middle' />
+          <span className='line bottom' />
         </div>
       </button>
 
       {/* Admin only action */}
-      <ul className="nav-wrapper">
+      <ul className='nav-wrapper'>
         {isUserAdmin(user) && (
-          <li className="nav-link-wrapper">
-            <Link className="nav-link" to={routes.CREATE_DEVICE}>
+          <li className='nav-link-wrapper'>
+            <Link className='nav-link' to={routes.CREATE_DEVICE}>
               Create Device
             </Link>
           </li>
         )}
 
         {/* user name */}
-        {name && (
-          <li className="nav-link-wrapper">
-            <span className="nav-link user-name">{name}</span>
+        {token && (
+          <li className='nav-link-wrapper'>
+            <span className='nav-link user-name'>{name}</span>
           </li>
         )}
 
         {/* log in & log out */}
-        {!name && (
-          <li className="nav-link-wrapper">
-            <Link className="nav-link" to={routes.LOG_IN}>
+        {!token && (
+          <li className='nav-link-wrapper'>
+            <Link className='nav-link' to={routes.LOG_IN}>
               Login
             </Link>
           </li>
         )}
-        {name && (
-          <li className="nav-link-wrapper">
-            <Button className="nav-link" onClick={logoutUser}>
+        {token && (
+          <li className='nav-link-wrapper'>
+            <Button className='nav-link' onClick={logoutUser}>
               Logout
             </Button>
           </li>
