@@ -16,7 +16,12 @@ export const SubmitButton = styled.input`
   background-color: ${StyledVariables.COLOR_PURPLE};
   cursor: pointer;
 
-  &:hover {
+  &:disabled {
+    background-color: gray;
+    cursor: default;
+  }
+
+  &:hover&:not(:disabled) {
     color: ${StyledVariables.COLOR_PURPLE};
     background-color: ${StyledVariables.COLOR_YELLOW};
   }

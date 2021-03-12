@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Headline } from 'sharedStyledComponents/atoms/Headlines';
 import { NarrowContainer } from 'sharedStyledComponents/wrappers/StyledNarrowContainer';
@@ -10,22 +10,71 @@ import { ILoginUser } from 'interfaces/ILoginUser';
 import { loginUser } from 'services/api/user/loginUser';
 import { Context as UserContext } from 'context/UserContext';
 import { ILoginUserData } from 'interfaces/ILoginResponse';
-import useLocalStorage from 'hooks/useLocalStorage';
+import { ILoginForm } from 'interfaces/ILoginForm';
+import { isEmailValid, isPasswordValid } from 'utils/validations';
 
 type submitEventType = React.FormEvent<HTMLFormElement>;
 
 interface IProps extends RouteComponentProps<any> {}
 
+enum FieldEnum {
+  email = 'email',
+  password = 'password',
+}
+
+interface ILoginErrors {
+  emailValid: boolean;
+  passwordValid: boolean;
+}
+
+const defaultFormFieldsState = {
+  email: '',
+  password: '',
+};
+
+const defaultErrorsState = {
+  emailValid: true,
+  passwordValid: true,
+};
+
 const Login = (props: IProps) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState(false);
+  const [formFields, setFormFields] = useState(defaultFormFieldsState as ILoginForm);
+  const [fieldsErrors, setFieldsError] = useState(defaultErrorsState as ILoginErrors);
+  const [submitError, setSubmitError] = useState(false);
   const { addUser } = useContext(UserContext);
-  const { setItem: setUser } = useLocalStorage('user');
+  const { email, password } = formFields;
+  const { emailValid, passwordValid } = fieldsErrors;
+  // const { setItem: setUser } = useLocalStorage('user');´
+
+  const setFieldValue = (fieldName: keyof ILoginForm, value: string) => {
+    const existingFields = { ...formFields };
+    existingFields[fieldName] = value;
+    setFormFields(existingFields);
+  };
+
+  useEffect(() => {
+    console.log('validate');
+    const errors = { ...fieldsErrors };
+
+    if (email.length) {
+      errors.emailValid = isEmailValid(email);
+      setFieldsError(errors);
+    }
+
+    if (password.length) {
+      errors.passwordValid = isPasswordValid(password);
+      setFieldsError(errors);
+    }
+  }, [formFields]);
 
   // submit login form
   const handleSubmit = async (e: submitEventType) => {
     e.preventDefault();
+
+    // validations
+    if (!emailValid || !passwordValid || !email || !password) {
+      return setSubmitError(true);
+    }
 
     // login data
     const loginData: ILoginUser = {
@@ -37,10 +86,10 @@ const Login = (props: IProps) => {
     const loginResponse: boolean | ILoginUserData = await loginUser(loginData);
 
     // handle login error
-    if (!loginResponse) return setLoginError(true);
+    if (!loginResponse) return setSubmitError(true);
 
     // save user to localstorage
-    setUser(JSON.stringify(loginResponse));
+    // setUser(JSON.stringify(loginResponse));
 
     // save user to context
     addUser(loginResponse as ILoginUserData);
@@ -52,38 +101,35 @@ const Login = (props: IProps) => {
   return (
     <NarrowContainer>
       <StyledFormWrapper>
-        <Headline as="h1">Log in</Headline>
-
+        <Headline as='h1'>Log in</Headline>
         {/* Log In error alert */}
         {/* TODO: create form alert styled-component */}
-        {loginError && (
-          <span style={{ color: 'red' }}>
-            Chyba přihlášení, zkontrolujte prosím přihlašovací údaje.
-          </span>
-        )}
+        {submitError && <span style={{ color: 'red' }}>Chyba přihlášení, zkontrolujte prosím přihlašovací údaje.</span>}
 
         {/* Log In form */}
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form onSubmit={e => handleSubmit(e)}>
           {/* Email */}
+          {!emailValid && <span style={{ color: 'red' }}>Zkontrolujte formát emailu</span>}
           <Input
-            label="Email:"
-            id="email"
-            type="email"
-            placeholder="your@email.com"
+            label='Email:'
+            id={FieldEnum.email}
+            type={FieldEnum.email}
+            placeholder='your@email.com'
             defaultValue={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setFieldValue(FieldEnum.email, e.target.value)}
           />
 
           {/* Password */}
+          {!passwordValid && <span style={{ color: 'red' }}>Heslo musí mít minimálně 6 znaků.</span>}
           <Input
-            label="Password:"
-            id="pass"
-            type="password"
-            placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
+            label='Password:'
+            id={FieldEnum.password}
+            type={FieldEnum.password}
+            placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;'
             defaultValue={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setFieldValue(FieldEnum.password, e.target.value)}
           />
-          <SubmitButton type="submit" value="Přihlásit se" />
+          <SubmitButton type='submit' value='Přihlásit se' disabled={!emailValid || !passwordValid || !email || !password} />
         </form>
       </StyledFormWrapper>
     </NarrowContainer>

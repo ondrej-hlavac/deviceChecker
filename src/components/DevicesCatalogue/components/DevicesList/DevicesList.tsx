@@ -8,8 +8,6 @@ interface IProps {
 }
 
 const DevicesList = ({ devices }: IProps) => {
-  console.log('🚀 ~ file: DevicesList.tsx ~ line 22 ~ DevicesList ~ devices', devices);
-
   if (!devices.length) return <span>žádný telefon nevyhovuje zvoleným filtrům</span>;
 
   return (

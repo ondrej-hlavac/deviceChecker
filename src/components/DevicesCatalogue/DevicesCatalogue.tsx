@@ -12,7 +12,6 @@ const DevicesCatalogue = () => {
   const [devices, setDevices] = useState([] as IDevice[]);
   const [filters, setFilters] = useState({} as IFilters);
   const [searchQuery, setSearchQuery] = useState('');
-  console.log('🚀 ~ file: DevicesCatalogue.tsx ~ line 13 ~ DevicesCatalogue ~ filters', filters);
 
   // get all devices and save them in state
   const fetchPhones = async () => {

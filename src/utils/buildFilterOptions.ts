@@ -2,7 +2,6 @@ import { IDevice } from 'interfaces/IDevice';
 import { IFiltersOptions } from 'interfaces/Filters';
 
 export const buildFilterOptions = (devices: IDevice[]): IFiltersOptions => {
-  console.log("🚀 ~ file: buildFilterOptions.ts ~ line 4 ~ buildFilterOptions ~ devices", devices)
   const os = [];
   const vendor = [];
 
