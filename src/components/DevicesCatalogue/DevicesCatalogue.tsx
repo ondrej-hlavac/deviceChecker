@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useContext } from 'react';
+import { Context as UserContext } from 'context/UserContext';
 import { StyledDevicesCatalogue } from './StyledDevicesCatalogue';
 import DevicesList from './components/DevicesList';
 import Filters from './components/Filters';
@@ -13,9 +14,12 @@ const DevicesCatalogue = () => {
   const [filters, setFilters] = useState({} as IFilters);
   const [searchQuery, setSearchQuery] = useState('');
 
+  const { user } = useContext(UserContext);
+  const { token } = user;
+
   // get all devices and save them in state
   const fetchPhones = async () => {
-    const getDevicesResponse: IDevice[] = await getPhones();
+    const getDevicesResponse: IDevice[] = await getPhones(token);
     setDevices(getDevicesResponse);
   };
 

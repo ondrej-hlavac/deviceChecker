@@ -1,13 +1,12 @@
 import axios from 'axios';
 import { API_PHONES } from 'constants/api';
 import { IDevice } from 'interfaces/IDevice';
-import { userTokenFromLS } from 'utils/user';
 
-export const getPhones = async (): Promise<IDevice[]> => {
-  if (!userTokenFromLS()) return [];
+export const getPhones = async (token: string): Promise<IDevice[]> => {
+  if (!token) return [];
 
   const headers = {
-    'Auth-Token': userTokenFromLS(),
+    'Auth-Token': token,
   };
 
   return await axios

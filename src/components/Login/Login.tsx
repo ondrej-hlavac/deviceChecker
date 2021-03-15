@@ -56,12 +56,12 @@ const Login = (props: IProps) => {
     console.log('validate');
     const errors = { ...fieldsErrors };
 
-    if (email.length) {
+    if (email) {
       errors.emailValid = isEmailValid(email);
       setFieldsError(errors);
     }
 
-    if (password.length) {
+    if (password) {
       errors.passwordValid = isPasswordValid(password);
       setFieldsError(errors);
     }
